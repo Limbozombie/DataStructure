@@ -99,6 +99,18 @@ public class Array<E> {
         return data[index];
     }
     
+    /** 获得最后一个 */
+    public E getLast() {
+        
+        return get(size - 1);
+    }
+    
+    /** 获得第一个 */
+    public E getFirst() {
+        
+        return get(0);
+    }
+    
     /** 修改index索引位置的元素为e */
     public void set(int index , E e) {
         
@@ -137,8 +149,8 @@ public class Array<E> {
             throw new IllegalArgumentException("Set failed. Index is illegal.");
         }
         E removed = data[index];
-        for (int i = index ; i <= size ; i++) {
-            data[i] = data[i + 1];
+        for(int i = index + 1 ; i < size ; i ++) {
+            data[i - 1] = data[i];
         }
         size--;
         //  lazy 缩容   防止 复杂度震荡的影响
@@ -172,7 +184,19 @@ public class Array<E> {
     @Override
     public String toString() {
         
-        return "Array: size =" + size + " ;capacity = " + data.length + "\n" + Arrays.toString(data);
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("Array: size = %d ;capacity = %d " , size , data.length));
+        builder.append("    [ ");
+        
+        for (int i = 0 ; i < size ; i++) {
+            builder.append(data[i]);
+            if (i < size - 1) {
+                builder.append(" , ");
+            }
+        }
+        builder.append(" ] ");
+        return builder.toString();
+        
     }
     
     private void resize(int newCapacity) {
