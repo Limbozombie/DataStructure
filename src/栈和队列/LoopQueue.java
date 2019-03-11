@@ -8,7 +8,6 @@ public class LoopQueue<E> implements Queue<E> {
     private E[] data;
     private int front, tail;
     private int size;
-    //todo:LoopQueue中不声明size，如何完成所有的逻辑？
     
     public LoopQueue(int capacity) {
         //LoopQueue有意识的浪费一个容量
